@@ -1,15 +1,15 @@
 package Hash;
 import Aluno.Aluno;
 
-public class LinearProbingHash extends AbstractHashTable{
-    
-    public LinearProbingHash(int tamanho_hash, double fator_carga){
+public class QuadraticProbingHash extends AbstractHashTable{
+    public QuadraticProbingHash(int tamanho_hash, double fator_carga){
         super(tamanho_hash, fator_carga);
     }
 
     @Override
-    public void inserir(Aluno Aluno){
-        int index = Hash(Aluno);
+    public void inserir(Aluno aluno){
+        int index = Hash(aluno);
+        int expoente = 1;
         int aux_colisao = 0;
 
         iteracoes++;
@@ -17,10 +17,12 @@ public class LinearProbingHash extends AbstractHashTable{
             if(aux_colisao == 0){
                 aux_colisao = 1;
             }
+            index = (index + expoente * expoente) % tamanho_hash;
+            expoente++;
             iteracoes++;
-            index = (index + 1) % tamanho_hash;
         }
-        arr[index] = Aluno;
+        
+        arr[index] = aluno;
         quant_itens++;
 
         if(aux_colisao == 1){
@@ -34,33 +36,40 @@ public class LinearProbingHash extends AbstractHashTable{
     }
 
     @Override
-    public Aluno buscar(Aluno Aluno){
-        int index = Hash(Aluno);
+    public Aluno buscar(Aluno aluno){
+        int index = Hash(aluno);
+        int expoente = 1;
+
         iteracoes++;
         while(arr[index] != null){
-            if(arr[index].getId() == Aluno.getId()){
+            if(arr[index].getId() == aluno.getId()){
                 return arr[index];
             }
+            index = (index + expoente * expoente) % tamanho_hash;
+            expoente++;
             iteracoes++;
-            index = (index + 1) % tamanho_hash;
         }
         return null;
     }
 
     @Override
-    public Aluno remover(Aluno Aluno){
-        int index = Hash(Aluno);
+    public Aluno remover(Aluno aluno){
+        int index = Hash(aluno);
+        int expoente = 1;
+
         iteracoes++;
         while(arr[index] != null){
-            if(arr[index].getId() == Aluno.getId()){
+            if(arr[index].getId() == aluno.getId()){
                 Aluno rem = arr[index];
                 arr[index] = null;
                 quant_itens--;
                 return rem;
             }
+            index = (index + expoente * expoente) % tamanho_hash;
+            expoente++;
             iteracoes++;
-            index = (index + 1) % tamanho_hash;
         }
+        System.out.println("Aluno não encontrado");
         return null;
     }
 }

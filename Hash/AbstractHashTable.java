@@ -5,7 +5,6 @@ abstract public class AbstractHashTable {
     protected int quant_itens;
     protected int tamanho_hash;
     protected double fator_carga;
-    protected int key;
     protected Aluno[] arr;
     protected int iteracoes;
     protected int colisoes;
@@ -14,30 +13,14 @@ abstract public class AbstractHashTable {
         return quant_itens;
     }
 
-    public Integer Hash(Aluno Aluno){
-        switch(this.key){
-            case 1:
-                return Aluno.getId() % tamanho_hash;
-            case 2:
-                return Hash_ASCII(Aluno.getNome());
-            default:
-                return null;
-        }
+    public int Hash(Aluno Aluno){
+        return Aluno.getId() % tamanho_hash;
     }
 
-    private int Hash_ASCII(String nome){
-        int soma = 0;
-        for(int i = 0; i < nome.length(); i++){
-            soma += nome.charAt(i) * (i + 1);
-        }
-        return soma % tamanho_hash;
-    }
-
-    public AbstractHashTable(int tamanho_hash, double fator_carga, int key){
+    public AbstractHashTable(int tamanho_hash, double fator_carga){
         this.quant_itens = 0;
         this.tamanho_hash = tamanho_hash;
         this.fator_carga = fator_carga;
-        this.key = key;
         this.arr = new Aluno[tamanho_hash];
         this.iteracoes = 0;
         this.colisoes = 0;
@@ -56,7 +39,7 @@ abstract public class AbstractHashTable {
         System.out.println("------------------");
     }
 
-    protected boolean verifyRehashing(){
+    protected boolean verificarRehashing(){
         double aux_fator_carga = (double) quant_itens / tamanho_hash;
         if(aux_fator_carga > fator_carga){
             return true;

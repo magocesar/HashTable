@@ -10,12 +10,14 @@ abstract public class AbstractHashTable {
         return num % tamanho_hash;
     }
 
+    //construtor da tabela hash 
     public AbstractHashTable(int tamanho_hash, double fator_carga){
         this.quant_itens = 0;
         this.tamanho_hash = tamanho_hash;
         this.fator_carga = fator_carga;
     }
 
+    //Funcao usada para printar os valores da tabela hash 
     public void print(){
         System.out.println("------------------");
         System.out.println("Quantidade de itens: " + quant_itens);
@@ -36,6 +38,7 @@ abstract public class AbstractHashTable {
         return false;
     }
 
+    
     protected void sobreescrever(Aluno Aluno){
         int index = Hash(Aluno.getId());
         arr[index] = Aluno;

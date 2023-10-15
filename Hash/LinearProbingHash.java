@@ -7,9 +7,12 @@ public class LinearProbingHash extends AbstractHashTable{
         this.arr = new Aluno[tamanho_hash];
     }
 
+    //Metodo para inserir valores na tabela hash 
     @Override
     public void inserir(Aluno Aluno){
 
+        //Caso um valor que seja inserido ja tenha sua posicao preenchida o metodo 
+        //sobreescrever sera chamado e o valor sera sobrescrito 
         if(buscar(Aluno.getId()) != null){
             sobreescrever(Aluno);
             return;
@@ -17,10 +20,14 @@ public class LinearProbingHash extends AbstractHashTable{
 
         int index = Hash(Aluno.getId());
 
+        //Enquanto a posicao index do array nao for nula ele continuara buscando a proxima posicao disponivel 
+        //para alocar o dado 
         while(arr[index] != null){
             index = (index + 1) % tamanho_hash;
         }
 
+        //Quando achar uma posicao disponivel o dado sera alocado 
+        //e a quantidade de itens alocados sera acrescida 
         arr[index] = Aluno;
         quant_itens++;
 
@@ -29,30 +36,40 @@ public class LinearProbingHash extends AbstractHashTable{
         }
     }
 
+    //Metodo usado para buscar um valor dado dentro da tabela hash 
     @Override
     public Aluno buscar(int num){
-
+        
+        //Index = valor que sera buscado 
         int index = Hash(num);
 
+        //Enquanto a posicao index do array nao estiver vazia 
         while(arr[index] != null){
 
+            //Caso a posicao index do array for igual ao valor fornecido entao o valor foi encontrado 
             if(arr[index].getId() == num){
                 return arr[index];
             }
 
+            //Caso contrario ele continua a busca para o proximo valor da tabela 
             index = (index + 1) % tamanho_hash;
         }
 
         return null;
     }
 
+    //Metodo usado para remover um valor da tabela hash 
     @Override
     public Aluno remover(int num){
 
         int index = Hash(num);
 
+        //Enquanto a posicao index do array for diferente de nulo 
         while(arr[index] != null){
 
+            //Caso o aray na posicao index seja igual ao valor desejado 
+            //Instacia-se um objeto Aluno com nome rem que possui o valor do array na posicao index  
+            //Declara a posicao index do array como nula e diminuimos 1 item da quantidade de itens 
             if(arr[index].getId() == num){
                 Aluno rem = arr[index];
                 arr[index] = null;
@@ -66,6 +83,7 @@ public class LinearProbingHash extends AbstractHashTable{
         return null;
     }
 
+    //Metodo usado para aumentar o numero de posicoes diponiveis na tabela hash 
     @Override
     protected void rehashing(){
 

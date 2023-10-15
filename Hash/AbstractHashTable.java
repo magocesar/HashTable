@@ -1,15 +1,10 @@
 package Hash;
-import Aluno.Aluno;
+import aux_proj.Aluno;
 abstract public class AbstractHashTable {
     
-    protected int quant_itens;
-    protected int tamanho_hash;
+    protected int quant_itens, tamanho_hash, iteracoes;
     protected double fator_carga;
     protected Aluno[] arr;
-    protected int iteracoes;
-    public int obterTamanho(){
-        return quant_itens;
-    }
 
     public int Hash(int num){
         return num % tamanho_hash;
@@ -19,13 +14,13 @@ abstract public class AbstractHashTable {
         this.quant_itens = 0;
         this.tamanho_hash = tamanho_hash;
         this.fator_carga = fator_carga;
-        this.arr = new Aluno[tamanho_hash];
         this.iteracoes = 0;
     }
 
-    public void printHash(){
+    public void print(){
         System.out.println("------------------");
         System.out.println("Iterações: " + iteracoes);
+        System.out.println("Quantidade de itens: " + quant_itens);
         System.out.println("Tamanho do arr: " + tamanho_hash);
         for(int i = 0; i < arr.length; i++){
             if(arr[i] != null){
@@ -43,23 +38,14 @@ abstract public class AbstractHashTable {
         return false;
     }
 
-    protected void rehashing(){
-        int tamanho_hash_antigo = tamanho_hash;
-        tamanho_hash *= 2;
-        Aluno[] aux_arr = new Aluno[tamanho_hash];
-        for(int i = 0; i < tamanho_hash_antigo; i++){
-            if(arr[i] != null){
-                int index = Hash(arr[i].getId());
-                while(aux_arr[index] != null){
-                    index = (index + 1) % tamanho_hash;
-                }
-                aux_arr[index] = arr[i];
-            }
-        }
-        arr = aux_arr;
+    protected void sobreescrever(Aluno Aluno){
+        int index = Hash(Aluno.getId());
+        iteracoes++;
+        arr[index] = Aluno;
     }
 
     abstract protected void inserir(Aluno Aluno);
     abstract protected Aluno buscar(int num);
     abstract protected Aluno remover(int num);
+    abstract protected void rehashing();
 }

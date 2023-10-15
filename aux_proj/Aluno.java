@@ -1,4 +1,4 @@
-package Aluno;
+package aux_proj;
 
 public class Aluno{
     private int id;

@@ -6,7 +6,8 @@
 <img src = "">
 
 <h2>Funcionalidades</h2>
-<h3>O projeto inclui as seguintes funcionalidades:</h3>
+<h3>O projeto implementa 3 tipos de tratamento de colisão: Linear, Quadrática e Por Double Linked List.</h3>
+<h4>Cada Hash possui as seguintes funcionalidades: <h4>
 <ul>
 <li>Inserção de um Elemento:</li>
 

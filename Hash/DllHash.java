@@ -12,9 +12,7 @@ public class DllHash extends AbstractHashTable{
         this.arr = new DoubleLinkedList[tamanho_hash];
         this.quant_dll = 0;
     }
-
-    //Metodo que verifica se o array na posicao index esta vazio e apos isso cria uma dll 
-    //apos cada insercao 
+ 
     @Override
     public void inserir(Aluno Aluno){
 
@@ -25,11 +23,13 @@ public class DllHash extends AbstractHashTable{
 
         int index = Hash(Aluno.getId());
         
+        //Caso a posicao index do array seja nula, cria uma DLL
         if(arr[index] == null){
             arr[index] = new DoubleLinkedList<Aluno>();
             quant_dll++;
         }
 
+        //Adiciona o aluno na DLL
         arr[index].append(Aluno);
         quant_itens++;
 

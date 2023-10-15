@@ -30,6 +30,7 @@ abstract public class AbstractHashTable {
         System.out.println("------------------");
     }
 
+    //Verificar se a tabela hash precisa ser refeita com base no fator de carga
     protected boolean verificarRehashing(){
         double aux_fator_carga = (double) quant_itens / tamanho_hash;
         if(aux_fator_carga > fator_carga){
@@ -38,12 +39,13 @@ abstract public class AbstractHashTable {
         return false;
     }
 
-    
+    //Funcao usada para sobreescrever um valor na tabela hash, sem aumentar a quantidade de itens
     protected void sobreescrever(Aluno Aluno){
         int index = Hash(Aluno.getId());
         arr[index] = Aluno;
     }
 
+    //Metodos abstratos que serao implementados nas classes filhas
     abstract protected void inserir(Aluno Aluno);
     abstract protected Aluno buscar(int num);
     abstract protected Aluno remover(int num);

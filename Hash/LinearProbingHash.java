@@ -11,8 +11,7 @@ public class LinearProbingHash extends AbstractHashTable{
     @Override
     public void inserir(Aluno Aluno){
 
-        //Caso um valor que seja inserido ja tenha sua posicao preenchida o metodo 
-        //sobreescrever sera chamado e o valor sera sobrescrito 
+        //Caso a key ja exista na tabela hash entao o valor sera sobrescrito
         if(buscar(Aluno.getId()) != null){
             sobreescrever(Aluno);
             return;

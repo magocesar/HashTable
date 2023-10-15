@@ -10,7 +10,7 @@ public class DoubleLinkedList<T> {
         this.size = 0;
     }
 
-    //Add to head
+    //Adiciona no fim
     public void push(T data){
         size++;
         node<T> node = new node<T>(data);
@@ -26,7 +26,7 @@ public class DoubleLinkedList<T> {
         head = node;
     }
 
-    //Add to tail
+    //Adiciona no comeco
     public void append(T data){
         size++;
         node<T> node = new node<T>(data);
@@ -41,7 +41,7 @@ public class DoubleLinkedList<T> {
         tail = node;
     }
 
-    //Add to index
+    //Adiciona ao index 
     public void insert(int index, T data) throws Exception{
         if(index < 0 || index > size - 1){
             throw new Exception("Index out of bounds");
@@ -54,7 +54,7 @@ public class DoubleLinkedList<T> {
 
         node<T> node = new node<T>(data);
 
-        //Verify if is closer to head or tail
+        //Verifica se esta proximo do fim ou do comeco 
         if(index < size / 2){
             //closer to head
             node<T> current = head;
@@ -68,7 +68,7 @@ public class DoubleLinkedList<T> {
             current.prev.next = node;
             current.prev = node;
         }else{
-            //closer to tail
+            //proximo ao comeco 
             node<T> current = tail;
 
             //How many times need to loop?
@@ -87,7 +87,7 @@ public class DoubleLinkedList<T> {
         size++;
     }
 
-    //Delete head
+    //Deleta o fim 
     public void HeadDel() throws Exception{
         if(head == null){
             throw new Exception("Empty list");
@@ -108,7 +108,7 @@ public class DoubleLinkedList<T> {
         aux.next = null;
     }
 
-    //Delete tail
+    //Deleta o comeco 
     public void TailDel() throws Exception{
         if(tail == null){
             throw new Exception("Empty list");
@@ -128,7 +128,7 @@ public class DoubleLinkedList<T> {
         aux.prev = null;
     }
 
-    //Delete by index
+    //Deleta por index 
     public void pop(int index) throws Exception{
         if(head == null){
             throw new Exception("Empty list");
@@ -148,7 +148,7 @@ public class DoubleLinkedList<T> {
             throw new Exception("Index out of bounds");
         }
 
-        //Verify if is closer to head or tail
+        //Verifica se esta mais proximo do comeco ou do fim 
         if(index < size / 2){
             node<T> current = head;
 
@@ -161,7 +161,7 @@ public class DoubleLinkedList<T> {
             current.prev = null;
             current.next = null;
         }else{
-            //closer to tail
+            //Mais proximo do comeco
             node<T> current = tail;
 
             //How many times need to loop?
@@ -184,7 +184,7 @@ public class DoubleLinkedList<T> {
         return size;
     }
 
-    //Return by Index
+    //Retorna o index 
     public T get(int index){
         if(index < 0 || index > size - 1){
             return null;
@@ -198,7 +198,7 @@ public class DoubleLinkedList<T> {
             return tail.data;
         }
 
-        //Verify if is closer to head or tail
+        //Verifica se esta proximo do comeco ou do fim
         if(index < size / 2){
             node<T> current = head;
 
@@ -208,7 +208,7 @@ public class DoubleLinkedList<T> {
 
             return current.data;
         }else{
-            //closer to tail
+            //cmais proximo do comeco 
             node<T> current = tail;
 
             //How many times need to loop?
@@ -222,7 +222,7 @@ public class DoubleLinkedList<T> {
         }
     }
 
-    //Print as an array
+    //Printa como um array 
     public void print(){
         if(head == null){
             System.out.println("[]");
@@ -259,7 +259,7 @@ public class DoubleLinkedList<T> {
         return null;
     }
 
-    //Reverse the list
+    //Inverte a lista 
     public void reverse(){
         node<T> current = head;
         node<T> aux = null;

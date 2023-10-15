@@ -82,8 +82,11 @@ public class DllHash extends AbstractHashTable{
             return null;
         }
 
+        //Itera as posicoes do array 
         for(int i = 0; i < arr[index].count(); i++){
 
+            //Caso encontre o valor transforma o valor da posicao indice no objeto rem 
+            //e da um Pop valor do array na posicao indice 
             if(arr[index].get(i).getId() == num){
                 Aluno rem = arr[index].get(i);
 
@@ -150,6 +153,7 @@ public class DllHash extends AbstractHashTable{
         arr = aux_arr;
     }
 
+    //Printa as informacoes da tabela 
     @Override
     public void print(){
         System.out.println("------------------");

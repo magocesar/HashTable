@@ -18,11 +18,9 @@ public class QuadraticProbingHash extends AbstractHashTable{
         int index = Hash(Aluno.getId());
         int expoente = 1;
 
-        iteracoes++;
         while(arr[index] != null){
             index = (index + expoente * expoente) % tamanho_hash;
             expoente++;
-            iteracoes++;
         }
         
         arr[index] = Aluno;
@@ -39,7 +37,6 @@ public class QuadraticProbingHash extends AbstractHashTable{
         int index = Hash(num);
         int expoente = 1;
 
-        iteracoes++;
         while(arr[index] != null){
 
             if(arr[index].getId() == num){
@@ -48,7 +45,6 @@ public class QuadraticProbingHash extends AbstractHashTable{
 
             index = (index + expoente * expoente) % tamanho_hash;
             expoente++;
-            iteracoes++;
         }
 
         return null;
@@ -60,7 +56,6 @@ public class QuadraticProbingHash extends AbstractHashTable{
         int index = Hash(num);
         int expoente = 1;
 
-        iteracoes++;
         while(arr[index] != null){
 
             if(arr[index].getId() == num){
@@ -72,7 +67,6 @@ public class QuadraticProbingHash extends AbstractHashTable{
 
             index = (index + expoente * expoente) % tamanho_hash;
             expoente++;
-            iteracoes++;
         }
 
         return null;

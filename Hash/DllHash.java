@@ -30,7 +30,6 @@ public class DllHash extends AbstractHashTable{
 
         arr[index].append(Aluno);
         quant_itens++;
-        iteracoes++;
 
         if(verificarRehashing()){
             rehashing();
@@ -42,7 +41,6 @@ public class DllHash extends AbstractHashTable{
         int index = Hash(Aluno.getId());
 
         for(int i = 0; i < arr[index].count(); i++){
-            iteracoes++;
 
             if(arr[index].get(i).getId() == Aluno.getId()){
 
@@ -63,12 +61,10 @@ public class DllHash extends AbstractHashTable{
         int index = Hash(num);
 
         if(arr[index] == null){
-            iteracoes++;
             return null;
         }
 
         for(int i = 0; i < arr[index].count(); i++){
-            iteracoes++;
             if(arr[index].get(i).getId() == num){
                 return arr[index].get(i);
             }
@@ -83,12 +79,10 @@ public class DllHash extends AbstractHashTable{
         int index = Hash(num);
         
         if(arr[index] == null){
-            iteracoes++;
             return null;
         }
 
         for(int i = 0; i < arr[index].count(); i++){
-            iteracoes++;
 
             if(arr[index].get(i).getId() == num){
                 Aluno rem = arr[index].get(i);
@@ -159,16 +153,15 @@ public class DllHash extends AbstractHashTable{
     @Override
     public void print(){
         System.out.println("------------------");
-        System.out.println("Iterações: " + iteracoes);
         System.out.println("Quantidade de itens: " + quant_itens);
         System.out.println("Tamanho do arr: " + tamanho_hash);
         for(int i = 0; i < arr.length; i++){
             if(arr[i] != null){
                 for(int j = 0; j < arr[i].count(); j++){
-                    System.out.println("Index: " + i + " : " + arr[i].get(j).getId() + " | " + arr[i].get(j).getNome());
+                        System.out.println("Index : " + i + " : " + arr[i].get(j).getId() + " | " + arr[i].get(j).getNome());
+                    }
                 }
             }
-        }
         System.out.println("------------------");
-    }
+        }
 }

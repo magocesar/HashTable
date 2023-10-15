@@ -17,9 +17,7 @@ public class LinearProbingHash extends AbstractHashTable{
 
         int index = Hash(Aluno.getId());
 
-        iteracoes++;
         while(arr[index] != null){
-            iteracoes++;
             index = (index + 1) % tamanho_hash;
         }
 
@@ -36,14 +34,12 @@ public class LinearProbingHash extends AbstractHashTable{
 
         int index = Hash(num);
 
-        iteracoes++;
         while(arr[index] != null){
 
             if(arr[index].getId() == num){
                 return arr[index];
             }
 
-            iteracoes++;
             index = (index + 1) % tamanho_hash;
         }
 
@@ -55,7 +51,6 @@ public class LinearProbingHash extends AbstractHashTable{
 
         int index = Hash(num);
 
-        iteracoes++;
         while(arr[index] != null){
 
             if(arr[index].getId() == num){
@@ -65,7 +60,6 @@ public class LinearProbingHash extends AbstractHashTable{
                 return rem;
             }
 
-            iteracoes++;
             index = (index + 1) % tamanho_hash;
         }
 

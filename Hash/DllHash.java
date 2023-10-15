@@ -13,6 +13,8 @@ public class DllHash extends AbstractHashTable{
         this.quant_dll = 0;
     }
 
+    //Metodo que verifica se o array na posicao index esta vazio e apos isso cria uma dll 
+    //apos cada insercao 
     @Override
     public void inserir(Aluno Aluno){
 
@@ -36,6 +38,7 @@ public class DllHash extends AbstractHashTable{
         }
     }
 
+    //Apaga o valor associado a posicao index do array e sobrescreve ela com o valor passado de parametro
     @Override
     protected void sobreescrever(Aluno Aluno){
         int index = Hash(Aluno.getId());

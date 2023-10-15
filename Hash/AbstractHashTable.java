@@ -7,14 +7,12 @@ abstract public class AbstractHashTable {
     protected double fator_carga;
     protected Aluno[] arr;
     protected int iteracoes;
-    protected int colisoes;
-
     public int obterTamanho(){
         return quant_itens;
     }
 
-    public int Hash(Aluno Aluno){
-        return Aluno.getId() % tamanho_hash;
+    public int Hash(int num){
+        return num % tamanho_hash;
     }
 
     public AbstractHashTable(int tamanho_hash, double fator_carga){
@@ -23,13 +21,11 @@ abstract public class AbstractHashTable {
         this.fator_carga = fator_carga;
         this.arr = new Aluno[tamanho_hash];
         this.iteracoes = 0;
-        this.colisoes = 0;
     }
 
     public void printHash(){
         System.out.println("------------------");
         System.out.println("Iterações: " + iteracoes);
-        System.out.println("Colisões: " + colisoes);
         System.out.println("Tamanho do arr: " + tamanho_hash);
         for(int i = 0; i < arr.length; i++){
             if(arr[i] != null){
@@ -53,7 +49,7 @@ abstract public class AbstractHashTable {
         Aluno[] aux_arr = new Aluno[tamanho_hash];
         for(int i = 0; i < tamanho_hash_antigo; i++){
             if(arr[i] != null){
-                int index = Hash(arr[i]);
+                int index = Hash(arr[i].getId());
                 while(aux_arr[index] != null){
                     index = (index + 1) % tamanho_hash;
                 }
@@ -64,6 +60,6 @@ abstract public class AbstractHashTable {
     }
 
     abstract protected void inserir(Aluno Aluno);
-    abstract protected Aluno buscar(Aluno Aluno);
-    abstract protected Aluno remover(Aluno Aluno);
+    abstract protected Aluno buscar(int num);
+    abstract protected Aluno remover(int num);
 }

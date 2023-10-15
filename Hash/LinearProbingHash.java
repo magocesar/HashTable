@@ -9,23 +9,14 @@ public class LinearProbingHash extends AbstractHashTable{
 
     @Override
     public void inserir(Aluno Aluno){
-        int index = Hash(Aluno);
-        int aux_colisao = 0;
-
+        int index = Hash(Aluno.getId());
         iteracoes++;
         while(arr[index] != null){
-            if(aux_colisao == 0){
-                aux_colisao = 1;
-            }
             iteracoes++;
             index = (index + 1) % tamanho_hash;
         }
         arr[index] = Aluno;
         quant_itens++;
-
-        if(aux_colisao == 1){
-            colisoes++;
-        }
 
         if(verificarRehashing()){
             System.out.println("Rehashing...");
@@ -34,11 +25,11 @@ public class LinearProbingHash extends AbstractHashTable{
     }
 
     @Override
-    public Aluno buscar(Aluno Aluno){
-        int index = Hash(Aluno);
+    public Aluno buscar(int num){
+        int index = Hash(num);
         iteracoes++;
         while(arr[index] != null){
-            if(arr[index].getId() == Aluno.getId()){
+            if(arr[index].getId() == num){
                 return arr[index];
             }
             iteracoes++;
@@ -48,11 +39,11 @@ public class LinearProbingHash extends AbstractHashTable{
     }
 
     @Override
-    public Aluno remover(Aluno Aluno){
-        int index = Hash(Aluno);
+    public Aluno remover(int num){
+        int index = Hash(num);
         iteracoes++;
         while(arr[index] != null){
-            if(arr[index].getId() == Aluno.getId()){
+            if(arr[index].getId() == num){
                 Aluno rem = arr[index];
                 arr[index] = null;
                 quant_itens--;

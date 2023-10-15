@@ -7,27 +7,19 @@ public class QuadraticProbingHash extends AbstractHashTable{
     }
 
     @Override
-    public void inserir(Aluno aluno){
-        int index = Hash(aluno);
+    public void inserir(Aluno Aluno){
+        int index = Hash(Aluno.getId());
         int expoente = 1;
-        int aux_colisao = 0;
 
         iteracoes++;
         while(arr[index] != null){
-            if(aux_colisao == 0){
-                aux_colisao = 1;
-            }
             index = (index + expoente * expoente) % tamanho_hash;
             expoente++;
             iteracoes++;
         }
         
-        arr[index] = aluno;
+        arr[index] = Aluno;
         quant_itens++;
-
-        if(aux_colisao == 1){
-            colisoes++;
-        }
 
         if(verificarRehashing()){
             System.out.println("Rehashing...");
@@ -36,13 +28,13 @@ public class QuadraticProbingHash extends AbstractHashTable{
     }
 
     @Override
-    public Aluno buscar(Aluno aluno){
-        int index = Hash(aluno);
+    public Aluno buscar(int num){
+        int index = Hash(num);
         int expoente = 1;
 
         iteracoes++;
         while(arr[index] != null){
-            if(arr[index].getId() == aluno.getId()){
+            if(arr[index].getId() == num){
                 return arr[index];
             }
             index = (index + expoente * expoente) % tamanho_hash;
@@ -53,13 +45,13 @@ public class QuadraticProbingHash extends AbstractHashTable{
     }
 
     @Override
-    public Aluno remover(Aluno aluno){
-        int index = Hash(aluno);
+    public Aluno remover(int num){
+        int index = Hash(num);
         int expoente = 1;
 
         iteracoes++;
         while(arr[index] != null){
-            if(arr[index].getId() == aluno.getId()){
+            if(arr[index].getId() == num){
                 Aluno rem = arr[index];
                 arr[index] = null;
                 quant_itens--;

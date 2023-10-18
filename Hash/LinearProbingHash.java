@@ -19,21 +19,48 @@ public class LinearProbingHash extends AbstractHashTable{
 
         int index = Hash(Aluno.getId());
 
+        boolean flag = false;
+
         //Enquanto a posicao index do array nao for nula ele continuara buscando a proxima posicao disponivel 
         //para alocar o dado 
         while(arr[index] != null){
+
+            if(arr[index].getId() == -1){
+                flag = true;
+                break;
+            }
+
             index = (index + 1) % tamanho_hash;
         }
 
         //Quando achar uma posicao disponivel o dado sera alocado 
         //e a quantidade de itens alocados sera acrescida 
         arr[index] = Aluno;
-        quant_itens++;
+
+        if(!flag){
+            quant_itens++;
+        }
 
         if(verificarRehashing()){
             rehashing();
         }
     }
+
+    @Override
+    protected void sobreescrever(Aluno Aluno){
+        int index = Hash(Aluno.getId());
+
+        while(arr[index] != null){
+    
+            if(arr[index].getId() == Aluno.getId()){
+                arr[index] = Aluno;
+                return;
+            }
+
+            index = (index + 1) % tamanho_hash;
+        }
+    }
+
 
     //Metodo usado para buscar um valor dado dentro da tabela hash 
     @Override
@@ -71,8 +98,7 @@ public class LinearProbingHash extends AbstractHashTable{
             //Declara a posicao index do array como nula e diminuimos 1 item da quantidade de itens 
             if(arr[index].getId() == num){
                 Aluno rem = arr[index];
-                arr[index] = null;
-                quant_itens--;
+                arr[index] = new Aluno(-1, "*Removido*");
                 return rem;
             }
 
@@ -93,6 +119,12 @@ public class LinearProbingHash extends AbstractHashTable{
         for(int i = 0; i < tamanho_hash_antigo; i++){
 
             if(arr[i] != null){
+
+                if(arr[i].getId() == -1){
+                    quant_itens--;
+                    continue;
+                }
+
                 int index = Hash(arr[i].getId());
 
                 while(aux_arr[index] != null){

@@ -2,6 +2,7 @@ package Hash;
 import aux_proj.Aluno;
 
 public class QuadraticProbingHash extends AbstractHashTable{
+
     public QuadraticProbingHash(int tamanho_hash, double fator_carga){
         super(tamanho_hash, fator_carga);
         this.arr = new Aluno[tamanho_hash];
@@ -18,16 +19,45 @@ public class QuadraticProbingHash extends AbstractHashTable{
         int index = Hash(Aluno.getId());
         int expoente = 1;
 
+        boolean flag = false;
+
         while(arr[index] != null){
+
+            if(arr[index].getId() == -1){
+                flag = true;
+                break;
+            }
+
             index = (index + expoente * expoente) % tamanho_hash;
             expoente++;
         }
         
         arr[index] = Aluno;
-        quant_itens++;
+        
+        if(!flag){
+            quant_itens++;
+        }
 
         if(verificarRehashing()){
             rehashing();
+        }
+    }
+
+    @Override
+    protected void sobreescrever(Aluno Aluno){
+            
+        int index = Hash(Aluno.getId());
+        int expoente = 1;
+
+        while(arr[index] != null){
+
+            if(arr[index].getId() == Aluno.getId()){
+                arr[index] = Aluno;
+                return;
+            }
+
+            index = (index + expoente * expoente) % tamanho_hash;
+            expoente++;
         }
     }
 
@@ -60,8 +90,7 @@ public class QuadraticProbingHash extends AbstractHashTable{
 
             if(arr[index].getId() == num){
                 Aluno rem = arr[index];
-                arr[index] = null;
-                quant_itens--;
+                arr[index] = new Aluno(-1, "*Removido*");
                 return rem;
             }
 
@@ -81,6 +110,11 @@ public class QuadraticProbingHash extends AbstractHashTable{
         for(int i = 0; i < tamanho_hash_antigo; i++){
 
             if(arr[i] != null){
+
+                if(arr[i].getId() == -1){
+                    quant_itens--;
+                    continue;
+                }
 
                 int index = Hash(arr[i].getId());
                 int expoente = 1;
